@@ -3,14 +3,9 @@
 @section('stylesheets')
     {!! Html::style('css/parsley.css') !!}
     {!! Html::style('css/select2.min.css') !!}
-    <script src="//cdn.tinymce.com/4/tinymce.min.js">
-    </script>
-    <script>
-        tinymce.init({
-            selector:'textarea',
-            plugins:'link'
-        });
-    </script>
+     <!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 @endsection
 @section('content')
 	
@@ -34,7 +29,10 @@
     {!! Form::file('feature_image') !!}
 
 	{!! Form::label('body','Body:',['class'=>'form-spacing-top']) !!}
-	{!! Form::textarea('body',null,["class"=>'form-control ']) !!}
+	<?php 
+	    echo Form::textarea('body',null,['class' => 'form-control', 'id' => 'editor']);
+	?>
+ 
  
 
 	</div>
@@ -83,5 +81,14 @@
     <script type="text/javascript">
     $(".select-multi").select2();
     $(".select-multi").select2().val({!! json_encode($post->tags()->getRelatedIds()) !!}).trigger('change');
+</script>
+<script>
+//   const quill = new Quill('#editor', {
+//     theme: 'snow'
+//   });
+
+$(document).ready(function() {
+        $('#editor').summernote();
+    });
 </script>
 @endsection

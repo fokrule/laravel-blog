@@ -10,7 +10,9 @@
 			<h1>
 				{{ $post->title}}
 			</h1>
+			<?php if (isset($post->image)){ ?>
 			<img src="{{asset('images/'.$post->image)}}" alt="" height="200" width="200">
+			<?php } ?>
 			<p>
 				{!!$post->body!!}
 			</p>
